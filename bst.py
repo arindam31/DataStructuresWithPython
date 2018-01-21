@@ -20,7 +20,6 @@ class BST:
 
         #First scenario, if value is less that root value
         if value < cur_node.value:
-
             # Two scenarios: current node has a left child. Or Not.
 
             if cur_node.left_child == None:
@@ -33,5 +32,12 @@ class BST:
                 # as cur_node.left_node. This recurtion will end when a None is found
                 #i.e a node with no left_node
                 self._insert(value, cur_node.left_node)
-                
+        elif value > cur_node.value:
+            if cur_node.right_child == None:
+                # We need to create a right child since None exist currently
+                cur_node.right_node = node(value)
+            else:
+                self._insert(value, cur_node.right_node)
+        else:
+            print 'Value already exists in the tree'
             
