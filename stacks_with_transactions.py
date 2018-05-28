@@ -5,6 +5,7 @@ class Stack(object):
 
     def push(self, value):
         self.items.append(value)
+            
 
     def top(self):
         if self.items:
@@ -18,6 +19,23 @@ class Stack(object):
             return int(popped)
         else:
             return 0
+
+    def begin(self):
+        # This is for beginning of a transaction.
+        # We save the state of the database here
+        self.transaction_in_progress = True
+        self.backup = self.items
+        
+    def rollback(self):
+        # This is to roll back all steps in transaction
+        self.items = self.backup
+
+    def commit(self):
+        #If all goes well, lets all steps executed remain
+        # (or execute if we are storing steps to be performed, not executing).
+        pass
+        
+
 
 def test():
     # Define your tests here
